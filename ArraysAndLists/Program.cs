@@ -11,6 +11,8 @@ namespace ArraysAndLists
     {
         static void Main(string[] args)
         {
+            Arrays.Write();
+
             // List of values to sort
             int[] integerValues = { -11, 12, -42, 0, 1, 90, 68, 6, -9 };
             string[] stringValues = { "Mary", "Marcin", "Ann", "James", "George", "Nicole" };

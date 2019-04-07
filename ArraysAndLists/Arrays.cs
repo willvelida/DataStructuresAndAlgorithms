@@ -9,7 +9,7 @@ namespace ArraysAndLists
 {
     public static class Arrays
     {
-        static void Write()
+        public static void Write()
         {
             // decalre single dimension to hold 12 months in a year
             string[] months = new string[12];
