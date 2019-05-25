@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9490F030-8594-4616-9BBE-F77D5369241D}</ProjectGuid>
+    <ProjectGuid>{5EA0F64B-388B-4C49-9358-A2B739D7611C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>GettingStarted</RootNamespace>
-    <AssemblyName>GettingStarted</AssemblyName>
+    <RootNamespace>SortingAlgorithms</RootNamespace>
+    <AssemblyName>SortingAlgorithms</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,9 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Person.cs" />
+    <Compile Include="BubbleSort.cs" />
+    <Compile Include="InsertionSort.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuickSort.cs" />
+    <Compile Include="SelectionSort.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

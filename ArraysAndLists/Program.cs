@@ -9,62 +9,51 @@ namespace ArraysAndLists
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Arrays.Write();
+            SingleDimensionArrays();
+            MultiDimensionArrays();
+            Console.ReadLine();
+        }
 
-            // List of values to sort
-            int[] integerValues = { -11, 12, -42, 0, 1, 90, 68, 6, -9 };
-            string[] stringValues = { "Mary", "Marcin", "Ann", "James", "George", "Nicole" };
+        public static void SingleDimensionArrays()
+        {
+            string[] months = new string[12];
 
-            // Implement Selection Sort algorithms
-            SelectionSort.Sort(integerValues);
-            SelectionSort.Sort(stringValues);
-            Console.WriteLine("Selection Sort results");
-            Console.WriteLine(string.Join(" | ", integerValues));
-            Console.WriteLine(string.Join(" | ", stringValues));
-
-            // Implement Insertion Sort algorithms
-            InsertionSort.Sort(integerValues);
-            Console.WriteLine("Insertion Sort results");
-            Console.WriteLine(string.Join(" | ", integerValues));
-
-            // Implement Bubble Sort algorithms
-            BubbleSort.Sort(integerValues);
-            Console.WriteLine("Bubble Sort results");
-            Console.WriteLine(string.Join(" | ", integerValues));
-
-            // List of people
-            List<Person> people = new List<Person>();
-            people.Add(new Person() { Name = "Will", Country = CountryEnum.UK, Age = 28 });
-            people.Add(new Person() { Name = "James", Country = CountryEnum.PL, Age = 19 });
-            people.Add(new Person() { Name = "Clair", Country = CountryEnum.DE, Age = 48 });
-
-            // Sort the list by names of poeple in ascending order
-            List<Person> results = people.OrderBy(p => p.Name).ToList();
-
-            // Iterate through the list
-            foreach (Person person in results)
+            for (int month = 1; month <= 12; month++)
             {
-                Console.WriteLine($"{person.Name} ({person.Age} years) from {person.Country}.");
+                DateTime firstDay = new DateTime(DateTime.Now.Year, month, 1);
+                string name = firstDay.ToString("MMMM", CultureInfo.CreateSpecificCulture("en"));
+                months[month - 1] = name;
             }
 
-            
-
-            List<double> numbers = new List<double>();
-            do
+            foreach (string month in months)
             {
-                Console.WriteLine("Enter a number!");
-                string numberString = Console.ReadLine();
-                if (!double.TryParse(numberString, NumberStyles.Float, new NumberFormatInfo(), out double number))
-                {
-                    break;
-                }
-                numbers.Add(number);
-                Console.WriteLine($"The average value: {numbers.Average()}");
-            } while (true);
-
-            
+                Console.WriteLine($"-> {month}");
+            }
         }
+
+        public static void MultiDimensionArrays()
+        {
+            int[,] results = new int[10, 10];
+
+            for (int i = 0; i < results.GetLength(0); i++)
+            {
+                for (int j = 0; j < results.GetLength(1); j++)
+                {
+                    results[i, j] = (i + 1) * (j + 1);
+                }
+            }
+
+            for (int i = 0; i < results.GetLength(0); i++)
+            {
+                for (int j = 0; j < results.GetLength(1); j++)
+                {
+                    Console.Write("{0,4}", results[i, j]);
+                }
+                Console.WriteLine();
+            }
+        }
+
     }
 }
