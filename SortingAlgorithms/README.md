@@ -16,22 +16,22 @@ The Selection Sort is implemented in the following method:
 
 ```csharp
 public static void Sort<T>(T[] array) where T : IComparable
+{
+	for (int i = 0; i < array.Length -1; i++)
 	{
-		for (int i = 0; i < array.Length -1; i++)
+		int minIndex = i;
+		T minValue = array[i];
+		for (int j = i + 1; j < array.Length; j++)
 		{
-			int minIndex = i;
-			T minValue = array[i];
-			for (int j = i + 1; j < array.Length; j++)
+			if (array[j].CompareTo(minValue) < 0) 
 			{
-				if (array[j].CompareTo(minValue) < 0) 
-				{
-						minIndex = j;
-						minValue = array[j];
-				}
+				minIndex = j;
+				minValue = array[j];
 			}
-			Swap(array, i, minIndex);
 		}
+		Swap(array, i, minIndex);
 	}
+}
 ```
 
 ## Insertion Sort
@@ -48,17 +48,17 @@ The Insertion Sort is implemented in the following method:
 
 ```csharp
 public static void Sort<T>(T[] array) where T : IComparable
+{
+	for (int i = 1; i < array.Length; i++)
 	{
-		for (int i = 1; i < array.Length; i++)
+		int j = i;
+		while (j > 0 && array[j].CompareTo(array[j - 1]) < 0)
 		{
-			int j = i;
-			while (j > 0 && array[j].CompareTo(array[j - 1]) < 0)
-			{
-				Swap(array, j, j - 1);
-				j--;
-			}
+			Swap(array, j, j - 1);
+			j--;
 		}
 	}
+}
 ```
 
 ## Bubble Sort
@@ -73,18 +73,18 @@ The Bubble Sort is implemented in the following method:
 
 ```csharp
 public static void Sort<T>(T[] array) where T : IComparable
+{
+	for (int i = 0; i < array.Length; i++)
 	{
-		for (int i = 0; i < array.Length; i++)
+		for (int j = 0; j < array.Length - 1; j++)
 		{
-			for (int j = 0; j < array.Length - 1; j++)
+			if (array[j].CompareTo(array[j + 1]) > 0)
 			{
-				if (array[j].CompareTo(array[j + 1]) > 0)
-				{
-					Swap(array, j, j + 1);
-				}
+				Swap(array, j, j + 1);
 			}
 		}
 	}
+}
 ```
 
 We can optimize Bubble Sort. This method is based on the assumption that comparisons should be stopped when no changes are discovered during one iteration through the array.
@@ -93,25 +93,25 @@ This method is implemented as follows:
 
 ```csharp
 public static T[] OptimizedSort<T>(T[] array) where T : IComparable
+{
+	for (int i = 0; i < array.Length; i++)
 	{
-		for (int i = 0; i < array.Length; i++)
+		bool isAnyChange = false;
+		for (int j = 0; j < array.Length - 1; j++)
 		{
-			bool isAnyChange = false;
-			for (int j = 0; j < array.Length - 1; j++)
+			if (array[j].CompareTo(array[j + 1]) > 0)
 			{
-				if (array[j].CompareTo(array[j + 1]) > 0)
-				{
-					isAnyChange = true;
-					Swap(array, j, j + 1);
-				}
-			}
-			if (!isAnyChange)
-			{
-				break;
+				isAnyChange = true;
+				Swap(array, j, j + 1);
 			}
 		}
-		return array;
+		if (!isAnyChange)
+		{
+			break;
+		}
 	}
+	return array;
+}
 ```
 
 ## Quicksort
@@ -133,24 +133,24 @@ This Quicksort implements two Sort() methods. The first one looks like this:
 
 ```csharp
 public static void Sort<T>(T[] array) where T : IComparable
-	{
-		Sort(array, 0, array.Length - 1);
-	}
+{
+	Sort(array, 0, array.Length - 1);
+}
 ```
 
 This sort only takes the array to be sorted as a parameter. The second sort looks like this:
 
 ```csharp
 private static T[] Sort<T>(T[] array, int lower, int upper) where T : IComparable
+{
+	if (lower < upper)
 	{
-		if (lower < upper)
-		{
-			int p = Partition(array, lower, upper);
-			Sort(array, lower, p);
-			Sort(array, p + 1, upper);
-		}
-		return array;
+		int p = Partition(array, lower, upper);
+		Sort(array, lower, p);
+		Sort(array, p + 1, upper);
 	}
+	return array;
+}
 ```
 
 This sort method takes the lower and upper indices that indicate which part of the array should be sorted.
@@ -163,21 +163,21 @@ The Partition() method is shown here:
 
 ```csharp
 private static int Partition<T>(T[] array, int lower, int upper) where T : IComparable
+{
+	int i = lower;
+	int j = upper;
+	T pivot = array[lower];
+	// or: T pivot = array[(lower + upper) / 2];
+	do
 	{
-		int i = lower;
-		int j = upper;
-		T pivot = array[lower];
-		// or: T pivot = array[(lower + upper) / 2];
-		do
-		{
-			while (array[i].CompareTo(pivot) < 0) { i++; }
-			while (array[j].CompareTo(pivot) > 0) { j--; }
-			if (i >= j) { break; }
-			Swap(array, i, j);
-		}
-		while (i <= j);
-		return j;
+		while (array[i].CompareTo(pivot) < 0) { i++; }
+		while (array[j].CompareTo(pivot) > 0) { j--; }
+		if (i >= j) { break; }
+		Swap(array, i, j);
 	}
+	while (i <= j);
+	return j;
+}
 ```
 
 ## Generic Swap method
@@ -186,9 +186,9 @@ Each Sorting Algorithm implements the following Swap() helper method:
 
 ```csharp
 private static void Swap<T>(T[] array, int first, int second) where T : IComparable
-	{
-		T temp = array[first];
-		array[first] = array[second];
-		array[second] = temp;
-	}
+{
+	T temp = array[first];
+	array[first] = array[second];
+	array[second] = temp;
+}
 ```
