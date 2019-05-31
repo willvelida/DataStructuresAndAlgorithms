@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SimpleLists
 {
-    internal class CircularLinkedListEnumerator<T> : IEnumerator<T>
+    public class CircularLinkedListEnumerator<T> : IEnumerator<T>
     {
         private LinkedListNode<T> _current;
         public T Current => _current.Value;
